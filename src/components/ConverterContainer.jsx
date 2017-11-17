@@ -107,7 +107,7 @@ class ConverterContainer extends React.Component {
             style={{ marginBottom: 15 }}
             onClick={() => this.handleConvert(this.state.options)}
           >
-            変換 (Ctrl+Enter)
+            変換
           </Button>
         </Form>
         <ConvertOptionsForm

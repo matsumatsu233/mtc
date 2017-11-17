@@ -29,7 +29,10 @@ class ConvertResult extends React.Component {
             onClick={this.props.handleSwitchSegment}
           />
           <Menu.Item position='right'>
-            <Button className="btn" data-clipboard-target="#converted">クリップボードにコピー (Ctrl+Shift+C)</Button>
+            <Button
+              className="btn"
+              data-clipboard-text={this.props.result.convertedHtml}
+            >クリップボードにコピー</Button>
           </Menu.Item>
         </Menu>
 
