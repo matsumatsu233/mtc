@@ -15,7 +15,7 @@ class ConvertOptionsForm extends React.Component {
     super(props);
 
     this.state = {
-      sizeOption: SIZES.small.name,
+      sizeOption: SIZES.large.name,
       sizeValueError: false,
       sourceOption: "default",
     };

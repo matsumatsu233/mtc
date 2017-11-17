@@ -1,10 +1,11 @@
 {
   "name": "mahjong-tiles-converter",
-  "version": "0.2.0",
+  "version": "1.0.0-beta",
   "license": "NO LICENSE",
   "dependencies": {
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
+    "react-router-dom": "^4.2.2",
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.76.0"
   },

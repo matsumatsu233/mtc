@@ -27,3 +27,9 @@ export const PARSE_RESULT = {
   SUCCESS: "SUCCESS",
   INVALID_INPUT: "INVALID_INPUT",
 };
+
+export const DEFAULT_OPTIONS = {
+  style: STYLES.mjDragon,
+  size: 40,
+  hostUrl: "https://raw.githubusercontent.com/matsumatsu233/mahjong-pai-converter/master/sources/",
+};

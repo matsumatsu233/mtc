@@ -11,7 +11,7 @@ import ConvertOptionsForm from "./ConvertOptionsForm.jsx";
 import ConvertResult from "./ConvertResult.jsx";
 import { parse } from "../core/MahjongTextParser.js";
 import { convert } from "../core/MahjongPaiToHtmlConverter.js";
-import { STYLES, PARSE_RESULT } from "../constants/constants.js";
+import { PARSE_RESULT, DEFAULT_OPTIONS } from "../constants/constants.js";
 
 class ConverterContainer extends React.Component {
   constructor() {
@@ -24,11 +24,7 @@ class ConverterContainer extends React.Component {
         convertedHtml: "",
         tilesCount: undefined,
       },
-      options: {
-        style: STYLES.mjDragon,
-        size: 24,
-        hostUrl: "https://raw.githubusercontent.com/matsumatsu233/mahjong-pai-converter/master/sources/",
-      },
+      options: DEFAULT_OPTIONS,
       resultActiveSegment: "プレビュー",
     };
 
