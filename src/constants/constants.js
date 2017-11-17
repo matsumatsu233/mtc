@@ -31,5 +31,5 @@ export const PARSE_RESULT = {
 export const DEFAULT_OPTIONS = {
   style: STYLES.mjDragon,
   size: 40,
-  hostUrl: "https://raw.githubusercontent.com/matsumatsu233/mahjong-pai-converter/master/sources/",
+  hostUrl: "https://raw.githubusercontent.com/matsumatsu233/mtc/master/sources/",
 };
