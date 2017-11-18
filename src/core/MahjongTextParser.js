@@ -4,7 +4,8 @@ export const PARSE_RESULT = {
 };
 
 export function parse(inputText) {
-  let inputTextBlock = inputText.replace(/\s+/g," ").split("|");
+  //let inputTextBlock = inputText.replace(/\s+/g," ").split("|");
+  let inputTextBlock = inputText.replace(/\s{2,}/g,"  ").split("  ");
   let outputSet = [];
   try {
     inputTextBlock.forEach((input) => {
@@ -12,7 +13,7 @@ export function parse(inputText) {
       let blockParseResult = parseOneBlock(inputTextBlock);
       if (blockParseResult.status === PARSE_RESULT.SUCCESS) {
         outputSet = outputSet.concat(blockParseResult.outputSet);
-        outputSet.push("|");
+        outputSet.push("  ");
       } else {
         throw "Invalid input";
       }
@@ -22,8 +23,9 @@ export function parse(inputText) {
       status: PARSE_RESULT.INVALID_INPUT,
     };
   }
+  // remove redundant spliter(two spaces)
   outputSet.pop();
-  outputSet.filter((e) => (!isSpace(e) && e !== "|"));
+
   return {
     status: PARSE_RESULT.SUCCESS,
     outputSet: outputSet,
@@ -174,6 +176,10 @@ function isSpace(char) {
   return char === " ";
 }
 
+function isTwoSpaces(string) {
+  return string === "  "; 
+}
+
 function isRotation(char) {
   return char === "l" || char === "r" || char === "b";
 }
@@ -191,5 +197,5 @@ function isInvalidCombination(Tiles) {
 }
 
 function getTilesCount(outputSet) {
-  return outputSet.filter((e) => (!isSpace(e) && e !== "|")).length + outputSet.filter((e) => isKan(e[0])).length;
+  return outputSet.filter((tileStr) => (!isSpace(tileStr) && !isTwoSpaces(tileStr))).length + outputSet.filter((tileStr) => isKan(tileStr[0])).length;
 }

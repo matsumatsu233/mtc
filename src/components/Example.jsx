@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Header,
+  Input,
   Message,
 } from "semantic-ui-react";
 
@@ -19,7 +20,11 @@ class Example extends React.Component {
           {this.props.header}
         </Header>
         <Message visible>
-          {this.props.inputValue}
+          <Input
+            fluid
+            transparent
+            value={this.props.inputValue}
+          />
         </Message>
         <div dangerouslySetInnerHTML={{ __html: convertedHtml }} />
       </div>
