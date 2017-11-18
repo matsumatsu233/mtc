@@ -15,7 +15,6 @@ class ConvertOptionsForm extends React.Component {
     super(props);
 
     this.state = {
-      sizeOption: SIZES.large.name,
       sizeValueError: false,
       sourceOption: "default",
     };
@@ -31,10 +30,10 @@ class ConvertOptionsForm extends React.Component {
     let newOptions = Object.assign({}, this.props.options);
     if (value !== SIZES.custom.name) {
       newOptions.size = SIZES[value].value;
-      this.props.handleChangeOptions(newOptions);
-    }
+    } 
+    newOptions.sizeOption = value;
+    this.props.handleChangeOptions(newOptions);
     this.setState({
-      sizeOption: value,
       sizeValueError: false,
     });
   }
@@ -86,29 +85,29 @@ class ConvertOptionsForm extends React.Component {
               <Form.Radio
                 label="小"
                 value={SIZES.small.name}
-                checked={this.state.sizeOption === SIZES.small.name}
+                checked={this.props.options.sizeOption === SIZES.small.name}
                 onChange={this.handleChangeSizeOption}
               />
               <Form.Radio
                 label="中"
                 value={SIZES.medium.name}
-                checked={this.state.sizeOption === SIZES.medium.name}
+                checked={this.props.options.sizeOption === SIZES.medium.name}
                 onChange={this.handleChangeSizeOption}
               />
               <Form.Radio
                 label="大"
                 value={SIZES.large.name}
-                checked={this.state.sizeOption === SIZES.large.name}
+                checked={this.props.options.sizeOption === SIZES.large.name}
                 onChange={this.handleChangeSizeOption}
               />
               <Form.Radio
                 label="カスタム"
                 value={SIZES.custom.name}
-                checked={this.state.sizeOption === SIZES.custom.name}
+                checked={this.props.options.sizeOption === SIZES.custom.name}
                 onChange={this.handleChangeSizeOption}
               />
               <Input
-                disabled={this.state.sizeOption !== SIZES.custom.name}
+                disabled={this.props.options.sizeOption !== SIZES.custom.name}
                 label={{ basic: true, content: "px" }}
                 labelPosition="right"
                 placeholder="高さ"

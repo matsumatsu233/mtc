@@ -56,7 +56,6 @@ class ConverterContainer extends React.Component {
   }
 
   handleChangeOptions = (options) => {
-    //TODO set to local storage
     this.setState({ options: options });
     this.handleConvert(options);
   }
