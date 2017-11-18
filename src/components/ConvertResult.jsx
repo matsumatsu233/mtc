@@ -40,10 +40,12 @@ class ConvertResult extends React.Component {
           { this.props.resultActiveSegment === "プレビュー" &&
             <div>
               <div dangerouslySetInnerHTML={{ __html: 
-                this.props.result.convertedHtml || "Nothing yet preview."
+                this.props.result.convertedHtml || "まだ何もありません"
               }} />
-              { this.props.result.tilesCount &&
-                <div>{`(${this.props.result.tilesCount}枚)`}</div>
+              {
+                this.props.result.tilesCount
+                  ? <div>{`(${this.props.result.tilesCount}枚)`}</div>
+                  : <div></div>
               }
             </div>
           }
