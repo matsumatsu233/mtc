@@ -31,5 +31,6 @@ export const PARSE_RESULT = {
 export const DEFAULT_OPTIONS = {
   style: STYLES.mjDragon,
   size: 40,
+  sizeOption: SIZES.large.name,
   hostUrl: "https://raw.githubusercontent.com/matsumatsu233/mtc/master/sources/",
 };
