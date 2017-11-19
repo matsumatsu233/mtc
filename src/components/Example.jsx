@@ -6,7 +6,7 @@ import {
 } from "semantic-ui-react";
 
 import { parse } from "../core/MahjongTextParser.js";
-import { convert } from "../core/MahjongPaiToHtmlConverter.js";
+import { convert } from "../core/MahjongTilesToHtmlConverter.js";
 import { DEFAULT_OPTIONS } from "../constants/constants.js";
 
 class Example extends React.Component {
