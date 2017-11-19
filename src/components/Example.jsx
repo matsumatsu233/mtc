@@ -5,15 +5,13 @@ import {
   Message,
 } from "semantic-ui-react";
 
-import { parse } from "../core/MahjongTextParser.js";
-import { convert } from "../core/MahjongTilesToHtmlConverter.js";
+import { convert } from "../core/MahjongTextToHtmlConverter.js";
 import { DEFAULT_OPTIONS } from "../constants/constants.js";
 
 class Example extends React.Component {
 
   render() {
-    const parseResult = parse(this.props.inputValue);
-    const convertedHtml = convert(parseResult.outputSet, DEFAULT_OPTIONS);
+    const { convertedHtml } = convert(this.props.inputText, DEFAULT_OPTIONS);
     return (
       <div style={{ marginBottom: 30 }}>
         <Header as='h3' dividing>
@@ -23,7 +21,7 @@ class Example extends React.Component {
           <Input
             fluid
             transparent
-            value={this.props.inputValue}
+            value={this.props.inputText}
           />
         </Message>
         <div dangerouslySetInnerHTML={{ __html: convertedHtml }} />

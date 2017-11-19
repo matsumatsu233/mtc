@@ -9,16 +9,15 @@ import {
 
 import ConvertOptionsForm from "./ConvertOptionsForm.jsx";
 import ConvertResult from "./ConvertResult.jsx";
-import { parse } from "../core/MahjongTextParser.js";
-import { convert } from "../core/MahjongTilesToHtmlConverter.js";
-import { PARSE_RESULT, DEFAULT_OPTIONS } from "../constants/constants.js";
+import { convert, CONVERT_RESULT } from "../core/MahjongTextToHtmlConverter.js";
+import { DEFAULT_OPTIONS } from "../constants/constants.js";
 
 class ConverterContainer extends React.Component {
   constructor() {
     super();
 
     const defaultState = {
-      inputValue: "",
+      inputText: "",
       parseError: false,
       result: {
         convertedHtml: "",
@@ -34,23 +33,23 @@ class ConverterContainer extends React.Component {
   }
 
   handleConvert = (options) => {
-    const parseResult = parse(this.state.inputValue);
-    if (parseResult.status === PARSE_RESULT.INVALID_INPUT) {
+    const convertResult = convert(this.state.inputText, options);
+    if (convertResult.status === CONVERT_RESULT.PARSE_ERROR) {
+      // TODO show error position
       this.setState({ parseError: true });
     } else {
-      const convertedHtml = convert(parseResult.outputSet, options);
       this.setState({
         result: {
-          convertedHtml: convertedHtml,
-          tilesCount: parseResult.tilesCount,
+          convertedHtml: convertResult.convertedHtml,
+          tilesCount: convertResult.tilesCount,
         }
       });
     }
   }
 
-  handleChangeInputValue = (event) => {
+  handleChangeInputText = (event) => {
     this.setState({
-      inputValue: event.target.value,
+      inputText: event.target.value,
       parseError: false,
     });
   }
@@ -90,12 +89,12 @@ class ConverterContainer extends React.Component {
           <TextArea
             autoHeight
             placeholder="牌を入力してください 例: 114s514m19p19z810s"
-            value={this.state.inputValue}
+            value={this.state.inputText}
             style={{
               fontFamily: "Lato,\"Helvetica Neue\",Arial,Helvetica,sans-serif",
               marginBottom: 10,
             }}
-            onChange={this.handleChangeInputValue}
+            onChange={this.handleChangeInputText}
           />
           <Button
             fluid

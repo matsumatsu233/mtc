@@ -1,4 +1,28 @@
-export function convert(outputSet, options) {
+import { parse, PARSE_RESULT } from "./MahjongTextParser.js";
+
+export const CONVERT_RESULT = {
+  SUCCESS: "SUCCESS",
+  PARSE_ERROR: "PARSE_ERROR",
+};
+
+export function convert(inputText, options) {
+  const parseResult = parse(inputText);
+  if (parseResult.status === PARSE_RESULT.INVALID_INPUT) {
+    // do something
+    return {
+      status: CONVERT_RESULT.PARSE_ERROR
+    };
+  } else {
+    const convertedHtml = convertParseResultToHtml(parseResult.outputSet, options);
+    return {
+      status: CONVERT_RESULT.SUCCESS,
+      convertedHtml: convertedHtml,
+      tilesCount: parseResult.tilesCount,
+    };
+  }
+}
+
+function convertParseResultToHtml(outputSet, options) {
   let url = options.hostUrl + options.style + "/";
   let scale = getScaleFromSize(options.size);
   let outputHtml = "";
