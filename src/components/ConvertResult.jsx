@@ -36,7 +36,7 @@ class ConvertResult extends React.Component {
           </Menu.Item>
         </Menu>
 
-        <Segment attached="bottom" textAlign='center'>
+        <Segment attached="bottom" style={{ whiteSpace: "pre-line" }}>
           { this.props.resultActiveSegment === "プレビュー" &&
             <div>
               <div dangerouslySetInnerHTML={{ __html: 
