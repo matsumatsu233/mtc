@@ -6,6 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import {
+  Button,
   Container,
   Header,
   Menu,
@@ -80,6 +81,9 @@ class App extends React.Component {
                 </ul>
               </Modal.Description>
             </Modal.Content>
+            <Modal.Actions>
+              <Button primary onClick={this.handleAboutDialogClose}>閉じる</Button>
+            </Modal.Actions>
           </Modal>
         </div>
       </Router>
