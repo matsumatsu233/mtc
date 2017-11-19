@@ -10,7 +10,7 @@ import {
 import ConvertOptionsForm from "./ConvertOptionsForm.jsx";
 import ConvertResult from "./ConvertResult.jsx";
 import { parse } from "../core/MahjongTextParser.js";
-import { convert } from "../core/MahjongPaiToHtmlConverter.js";
+import { convert } from "../core/MahjongTilesToHtmlConverter.js";
 import { PARSE_RESULT, DEFAULT_OPTIONS } from "../constants/constants.js";
 
 class ConverterContainer extends React.Component {

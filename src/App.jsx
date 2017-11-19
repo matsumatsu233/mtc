@@ -6,6 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import {
+  Button,
   Container,
   Header,
   Menu,
@@ -69,7 +70,7 @@ class App extends React.Component {
             <Modal.Header>About</Modal.Header>
             <Modal.Content>
               <Modal.Description>
-                <Header as="span">Mahjong Tiles Converter </Header><Header as="span" sub>1.0.0</Header>
+                <Header as="span">Mahjong Tiles Converter </Header><Header as="span" sub>1.1.0</Header>
                 <p>MIT©2017 <a href="http://ssdh233.me">まつまつ</a></p>
                 <Header as="span">Thanks</Header>
                 <ul>
@@ -80,6 +81,9 @@ class App extends React.Component {
                 </ul>
               </Modal.Description>
             </Modal.Content>
+            <Modal.Actions>
+              <Button primary onClick={this.handleAboutDialogClose}>閉じる</Button>
+            </Modal.Actions>
           </Modal>
         </div>
       </Router>
