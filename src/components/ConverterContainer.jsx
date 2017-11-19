@@ -3,13 +3,12 @@ import {
   Button,
   Container,
   Form,
-  Label,
   TextArea,
 } from "semantic-ui-react";
 
 import ConvertOptionsForm from "./ConvertOptionsForm.jsx";
 import ConvertResult from "./ConvertResult.jsx";
-import { convert, CONVERT_RESULT } from "../core/MahjongTextToHtmlConverter.js";
+import { convert } from "../core/MahjongTextToHtmlConverter.js";
 import { DEFAULT_OPTIONS } from "../constants/constants.js";
 
 class ConverterContainer extends React.Component {
@@ -18,7 +17,6 @@ class ConverterContainer extends React.Component {
 
     const defaultState = {
       inputText: "",
-      parseError: false,
       result: {
         convertedHtml: "",
         tilesCount: undefined,
@@ -34,23 +32,16 @@ class ConverterContainer extends React.Component {
 
   handleConvert = (options) => {
     const convertResult = convert(this.state.inputText, options);
-    if (convertResult.status === CONVERT_RESULT.PARSE_ERROR) {
-      // TODO show error position
-      this.setState({ parseError: true });
-    } else {
-      this.setState({
-        result: {
-          convertedHtml: convertResult.convertedHtml,
-          tilesCount: convertResult.tilesCount,
-        }
-      });
-    }
+    this.setState({
+      result: {
+        convertedHtml: convertResult,
+      }
+    });
   }
 
   handleChangeInputText = (event) => {
     this.setState({
       inputText: event.target.value,
-      parseError: false,
     });
   }
 
@@ -75,17 +66,6 @@ class ConverterContainer extends React.Component {
     return (
       <Container style={{ marginTop: 85 }}>
         <Form>
-          { this.state.parseError &&
-            <Label
-              basic
-              color='red'
-              pointing='below'
-              style={{
-                position: "absolute",
-                top: -37,
-              }}
-            >フォーマットが間違っています</Label>
-          }
           <TextArea
             autoHeight
             placeholder="牌を入力してください 例: 114s514m19p19z810s"

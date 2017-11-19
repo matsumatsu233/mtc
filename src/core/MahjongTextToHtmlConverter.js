@@ -1,24 +1,19 @@
 import { parse, PARSE_RESULT } from "./MahjongTextParser.js";
 
-export const CONVERT_RESULT = {
-  SUCCESS: "SUCCESS",
-  PARSE_ERROR: "PARSE_ERROR",
-};
+const MahjongTilesRegex = /(?:[0-9lrbLR][0-9lrbLRmpsz]*[mpsz] *)+/g;
 
 export function convert(inputText, options) {
-  const parseResult = parse(inputText);
-  if (parseResult.status === PARSE_RESULT.INVALID_INPUT) {
-    // do something
-    return {
-      status: CONVERT_RESULT.PARSE_ERROR
-    };
-  } else {
-    const convertedHtml = convertParseResultToHtml(parseResult.outputSet, options);
-    return {
-      status: CONVERT_RESULT.SUCCESS,
-      convertedHtml: convertedHtml,
-      tilesCount: parseResult.tilesCount,
-    };
+  const convertedHtml = inputText.replace(MahjongTilesRegex, parseAndConvert);
+  return convertedHtml;
+
+  function parseAndConvert(mahjongText){
+    const parseResult = parse(mahjongText);
+    if (parseResult.status === PARSE_RESULT.INVALID_INPUT) {
+      return `<font color="red">["${mahjongText}"のフォーマットが間違っています]</font>`;
+    } else {
+      const convertedHtml = convertParseResultToHtml(parseResult.outputSet, options);
+      return convertedHtml;
+    }
   }
 }
 
