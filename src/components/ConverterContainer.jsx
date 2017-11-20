@@ -65,7 +65,7 @@ class ConverterContainer extends React.Component {
         <Form>
           <TextArea
             autoHeight
-            placeholder="牌を入力してください 例: 114s514m19p19z810s"
+            placeholder={"ここに牌を入力してください。書き方が分からなかったら\"使い方\"を見てください。\n例: 123s456m789p44z 4z\n例: 14p1sから1pを切ります（普通の文章を混ぜても大丈夫です）"}
             value={this.state.inputText}
             style={{
               fontFamily: "Lato,\"Helvetica Neue\",Arial,Helvetica,sans-serif",
