@@ -21,7 +21,7 @@ class ExampleContainer extends React.Component {
         <Example header={"\"b\"+数字で牌の裏面を表示する（暗カンした場合）"} inputText="b222b2p b333b3p 4445p 0p l1111p" />
         <Example header={"\"L,R\"+数字+数字で重なった横向きの二つの牌を表示する（加カンした場合）"} inputText="5z 5z  1L111z 2L222z 3R333z 4R444z" />
         <Header as='h2' dividing>
-          文章に埋め込んでいる麻雀牌を変換する
+          文章に埋め込まれている麻雀牌を変換する
         </Header>
         <Example
           header={""}
