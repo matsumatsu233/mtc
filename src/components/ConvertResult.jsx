@@ -8,6 +8,8 @@ import {
   TextArea,
 } from "semantic-ui-react";
 
+import { doSomething } from "../core/MahjongTilesCounter";
+
 class ConvertResult extends React.Component {
 
   handleHtmlTextAreaFocus = (event) => {
@@ -39,14 +41,11 @@ class ConvertResult extends React.Component {
         <Segment attached="bottom" style={{ whiteSpace: "pre-line" }}>
           { this.props.resultActiveSegment === "プレビュー" &&
             <div>
-              <div dangerouslySetInnerHTML={{ __html: 
-                this.props.result.convertedHtml || "まだ何もありません"
-              }} />
-              {
-                this.props.result.tilesCount
-                  ? <div>{`(${this.props.result.tilesCount}枚)`}</div>
-                  : <div></div>
-              }
+              <div
+                style={{ lineHeight: "50px" }}
+                dangerouslySetInnerHTML={{ __html: 
+                  doSomething(this.props.result.convertedHtml) || "まだ何もありません"
+                }} />
             </div>
           }
           { this.props.resultActiveSegment === "HTML" &&
