@@ -11,10 +11,10 @@ import { DEFAULT_OPTIONS } from "../constants/constants.js";
 class Example extends React.Component {
 
   render() {
-    const convertedHtml = convert(this.props.inputText, DEFAULT_OPTIONS);
+    const convertedHtml = convert(this.props.inputText, this.props.options || DEFAULT_OPTIONS);
     return (
       <div style={{ marginBottom: 30 }}>
-        <Header as='h3' dividing>
+        <Header as='h3'>
           {this.props.header}
         </Header>
         <Message visible>
