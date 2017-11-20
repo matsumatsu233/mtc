@@ -8,7 +8,7 @@ import {
   TextArea,
 } from "semantic-ui-react";
 
-import { doSomething } from "../core/MahjongTilesCounter";
+import { addCount } from "../core/MahjongTilesCounter";
 
 class ConvertResult extends React.Component {
 
@@ -66,7 +66,7 @@ class ConvertResult extends React.Component {
               <div
                 style={{ lineHeight: "50px" }}
                 dangerouslySetInnerHTML={{ __html: 
-                  doSomething(this.props.result.convertedHtml) || "まだ何もありません"
+                  addCount(this.props.result.convertedHtml) || "まだ何もありません"
                 }} />
             </div>
           }

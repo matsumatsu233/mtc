@@ -1,11 +1,11 @@
 const htmlRegex = /(?:<.*?>)+/g;
 
-export function doSomething(convertedHtml) {
-  const tempConvertedHtml = convertedHtml.replace(htmlRegex, addCountString);
+export function addCount(convertedHtml) {
+  const convertedHtmlWithTilesCount = convertedHtml.replace(htmlRegex, addCountForOneGroup);
 
-  return tempConvertedHtml;
+  return convertedHtmlWithTilesCount;
 
-  function addCountString(html) {
+  function addCountForOneGroup(html) {
     const MahjongTilesCount = html.match(/<img.*?>/g).length;
 
     return `

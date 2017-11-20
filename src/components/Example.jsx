@@ -11,7 +11,7 @@ import { DEFAULT_OPTIONS } from "../constants/constants.js";
 class Example extends React.Component {
 
   render() {
-    const { convertedHtml } = convert(this.props.inputText, DEFAULT_OPTIONS);
+    const convertedHtml = convert(this.props.inputText, DEFAULT_OPTIONS);
     return (
       <div style={{ marginBottom: 30 }}>
         <Header as='h3' dividing>
