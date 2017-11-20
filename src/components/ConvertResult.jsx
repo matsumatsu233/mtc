@@ -12,6 +12,28 @@ import { doSomething } from "../core/MahjongTilesCounter";
 
 class ConvertResult extends React.Component {
 
+  constructor(props) {
+    super(props);
+
+    const defaultState = {
+      activeSegment: "プレビュー",
+    };
+
+    let savedState = this.getStateFromLocalStorage();
+
+    this.state = savedState || defaultState;
+  }
+
+  saveStateToLocalStorage = () => {
+    localStorage.setItem("ConvertResultState", JSON.stringify(this.state));
+  }
+
+  getStateFromLocalStorage = () => {
+    return JSON.parse(localStorage.getItem("ConvertResultState"));
+  }
+
+  handleSwitchSegment = (e, { name }) => this.setState({ activeSegment: name });
+
   handleHtmlTextAreaFocus = (event) => {
     event.target.select();
   }
@@ -22,13 +44,13 @@ class ConvertResult extends React.Component {
         <Menu attached='top' tabular>
           <Menu.Item
             name='プレビュー'
-            active={this.props.resultActiveSegment === "プレビュー"}
-            onClick={this.props.handleSwitchSegment}
+            active={this.state.activeSegment === "プレビュー"}
+            onClick={this.handleSwitchSegment}
           />
           <Menu.Item
             name='HTML'
-            active={this.props.resultActiveSegment === "HTML"}
-            onClick={this.props.handleSwitchSegment}
+            active={this.state.activeSegment === "HTML"}
+            onClick={this.handleSwitchSegment}
           />
           <Menu.Item position='right'>
             <Button
@@ -39,7 +61,7 @@ class ConvertResult extends React.Component {
         </Menu>
 
         <Segment attached="bottom" style={{ whiteSpace: "pre-line" }}>
-          { this.props.resultActiveSegment === "プレビュー" &&
+          { this.state.activeSegment === "プレビュー" &&
             <div>
               <div
                 style={{ lineHeight: "50px" }}
@@ -48,7 +70,7 @@ class ConvertResult extends React.Component {
                 }} />
             </div>
           }
-          { this.props.resultActiveSegment === "HTML" &&
+          { this.state.activeSegment === "HTML" &&
             <Form>
               <TextArea
                 id="converted"

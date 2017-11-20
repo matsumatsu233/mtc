@@ -22,7 +22,6 @@ class ConverterContainer extends React.Component {
         tilesCount: undefined,
       },
       options: DEFAULT_OPTIONS,
-      resultActiveSegment: "プレビュー",
     };
 
     let savedState = this.getStateFromLocalStorage();
@@ -51,14 +50,12 @@ class ConverterContainer extends React.Component {
   }
 
   saveStateToLocalStorage = () => {
-    localStorage.setItem("state", JSON.stringify(this.state));
+    localStorage.setItem("ConverterContainerState", JSON.stringify(this.state));
   }
 
   getStateFromLocalStorage = () => {
-    return JSON.parse(localStorage.getItem("state"));
+    return JSON.parse(localStorage.getItem("ConverterContainerState"));
   }
-
-  handleSwitchSegment = (e, { name }) => this.setState({ resultActiveSegment: name })
 
   render() {
     this.saveStateToLocalStorage();
@@ -91,8 +88,6 @@ class ConverterContainer extends React.Component {
         />
         <ConvertResult
           result={this.state.result}
-          resultActiveSegment={this.state.resultActiveSegment}
-          handleSwitchSegment={this.handleSwitchSegment}
         />
       </Container>
     );
