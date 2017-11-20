@@ -2,6 +2,7 @@ import React from "react";
 
 import {
   Button,
+  Checkbox,
   Form,
   Menu,
   Segment,
@@ -17,6 +18,7 @@ class ConvertResult extends React.Component {
 
     const defaultState = {
       activeSegment: "プレビュー",
+      showTilesCount: false,
     };
 
     let savedState = this.getStateFromLocalStorage();
@@ -32,13 +34,21 @@ class ConvertResult extends React.Component {
     return JSON.parse(localStorage.getItem("ConvertResultState"));
   }
 
-  handleSwitchSegment = (e, { name }) => this.setState({ activeSegment: name });
+  handleSwitchSegment = (e, { name }) => this.setState({ activeSegment: name })
+
+  handleChangeShowTilesCount = () => {
+    this.setState({
+      showTilesCount: !this.state.showTilesCount,
+    });
+  }
 
   handleHtmlTextAreaFocus = (event) => {
     event.target.select();
   }
 
   render() {
+    this.saveStateToLocalStorage();
+
     return (
       <div>
         <Menu attached='top' tabular>
@@ -63,10 +73,20 @@ class ConvertResult extends React.Component {
         <Segment attached="bottom" style={{ whiteSpace: "pre-line" }}>
           { this.state.activeSegment === "プレビュー" &&
             <div>
+              <Checkbox
+                toggle
+                checked={this.state.showTilesCount}
+                onChange={this.handleChangeShowTilesCount}
+                label='牌の数を表示する（オンにしても変換したHTMLに含まれない）'
+                style={{
+                  marginBottom: 20
+                }}
+              />
               <div
-                style={{ lineHeight: "50px" }}
+                style={ this.state.showTilesCount ? { lineHeight: "50px" } : {}}
                 dangerouslySetInnerHTML={{ __html: 
-                  addCount(this.props.result.convertedHtml) || "まだ何もありません"
+                  this.state.showTilesCount ? addCount(this.props.result.convertedHtml) : this.props.result.convertedHtml
+                  || "まだ何もありません"
                 }} />
             </div>
           }
