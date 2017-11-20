@@ -1,4 +1,23 @@
-export function convert(outputSet, options) {
+import { parse, PARSE_RESULT } from "./MahjongTextParser.js";
+
+const MahjongTilesRegex = /(?:[0-9lrbLR][0-9lrbLRmpsz]*[mpsz] *)+/g;
+
+export function convert(inputText, options) {
+  const convertedHtml = inputText.replace(MahjongTilesRegex, parseAndConvert);
+  return convertedHtml;
+
+  function parseAndConvert(mahjongText){
+    const parseResult = parse(mahjongText);
+    if (parseResult.status === PARSE_RESULT.INVALID_INPUT) {
+      return `<font color="red">["${mahjongText}"のフォーマットが間違っています]</font>`;
+    } else {
+      const convertedHtml = convertParseResultToHtml(parseResult.outputSet, options);
+      return convertedHtml;
+    }
+  }
+}
+
+function convertParseResultToHtml(outputSet, options) {
   let url = options.hostUrl + options.style + "/";
   let scale = getScaleFromSize(options.size);
   let outputHtml = "";
