@@ -6,8 +6,6 @@ export function doSomething(convertedHtml) {
   return tempConvertedHtml;
 
   function addCountString(html) {
-    console.log("addCountString", html);
-
     const MahjongTilesCount = html.match(/<img.*?>/g).length;
 
     return `
