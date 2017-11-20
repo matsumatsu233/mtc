@@ -71,24 +71,29 @@ class ConvertResult extends React.Component {
         </Menu>
 
         <Segment attached="bottom" style={{ whiteSpace: "pre-line" }}>
-          { this.state.activeSegment === "プレビュー" &&
-            <div>
-              <Checkbox
-                toggle
-                checked={this.state.showTilesCount}
-                onChange={this.handleChangeShowTilesCount}
-                label='牌の数を表示する（オンにしても変換したHTMLに含まれない）'
-                style={{
-                  marginBottom: 20
-                }}
-              />
-              <div
-                style={ this.state.showTilesCount ? { lineHeight: "50px" } : {}}
-                dangerouslySetInnerHTML={{ __html: 
-                  this.state.showTilesCount ? addCount(this.props.result.convertedHtml) : this.props.result.convertedHtml
-                  || "まだ何もありません"
-                }} />
-            </div>
+          {
+            this.state.activeSegment === "プレビュー" && (
+              this.props.result.convertedHtml ?
+                <div>
+                  <Checkbox
+                    toggle
+                    checked={this.state.showTilesCount}
+                    onChange={this.handleChangeShowTilesCount}
+                    label='牌の数を表示する（オンにしても変換したHTMLに含まれない）'
+                    style={{
+                      marginBottom: 20
+                    }}
+                  />
+                  <div
+                    style={ this.state.showTilesCount ? { lineHeight: "50px" } : {}}
+                    dangerouslySetInnerHTML={{ __html: 
+                      this.state.showTilesCount ? addCount(this.props.result.convertedHtml) : this.props.result.convertedHtml
+                    }}
+                  />
+                </div>
+                :
+                "まだ何もありません"
+            )
           }
           { this.state.activeSegment === "HTML" &&
             <Form>
