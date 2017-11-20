@@ -70,7 +70,7 @@ class App extends React.Component {
             <Modal.Header>About</Modal.Header>
             <Modal.Content>
               <Modal.Description>
-                <Header as="span">Mahjong Tiles Converter </Header><Header as="span" sub>1.2.0</Header>
+                <Header as="span">Mahjong Tiles Converter </Header><Header as="span" sub>1.2.1</Header>
                 <p>MIT©2017 <a href="http://ssdh233.me">まつまつ</a></p>
                 <Header as="span">Thanks</Header>
                 <ul>
