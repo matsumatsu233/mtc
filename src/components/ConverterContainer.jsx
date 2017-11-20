@@ -3,29 +3,25 @@ import {
   Button,
   Container,
   Form,
-  Label,
   TextArea,
 } from "semantic-ui-react";
 
 import ConvertOptionsForm from "./ConvertOptionsForm.jsx";
 import ConvertResult from "./ConvertResult.jsx";
-import { parse } from "../core/MahjongTextParser.js";
-import { convert } from "../core/MahjongTilesToHtmlConverter.js";
-import { PARSE_RESULT, DEFAULT_OPTIONS } from "../constants/constants.js";
+import { convert } from "../core/MahjongTextToHtmlConverter.js";
+import { DEFAULT_OPTIONS } from "../constants/constants.js";
 
 class ConverterContainer extends React.Component {
   constructor() {
     super();
 
     const defaultState = {
-      inputValue: "",
-      parseError: false,
+      inputText: "",
       result: {
         convertedHtml: "",
         tilesCount: undefined,
       },
       options: DEFAULT_OPTIONS,
-      resultActiveSegment: "プレビュー",
     };
 
     let savedState = this.getStateFromLocalStorage();
@@ -34,24 +30,17 @@ class ConverterContainer extends React.Component {
   }
 
   handleConvert = (options) => {
-    const parseResult = parse(this.state.inputValue);
-    if (parseResult.status === PARSE_RESULT.INVALID_INPUT) {
-      this.setState({ parseError: true });
-    } else {
-      const convertedHtml = convert(parseResult.outputSet, options);
-      this.setState({
-        result: {
-          convertedHtml: convertedHtml,
-          tilesCount: parseResult.tilesCount,
-        }
-      });
-    }
+    const convertResult = convert(this.state.inputText, options);
+    this.setState({
+      result: {
+        convertedHtml: convertResult,
+      }
+    });
   }
 
-  handleChangeInputValue = (event) => {
+  handleChangeInputText = (event) => {
     this.setState({
-      inputValue: event.target.value,
-      parseError: false,
+      inputText: event.target.value,
     });
   }
 
@@ -61,14 +50,12 @@ class ConverterContainer extends React.Component {
   }
 
   saveStateToLocalStorage = () => {
-    localStorage.setItem("state", JSON.stringify(this.state));
+    localStorage.setItem("ConverterContainerState", JSON.stringify(this.state));
   }
 
   getStateFromLocalStorage = () => {
-    return JSON.parse(localStorage.getItem("state"));
+    return JSON.parse(localStorage.getItem("ConverterContainerState"));
   }
-
-  handleSwitchSegment = (e, { name }) => this.setState({ resultActiveSegment: name })
 
   render() {
     this.saveStateToLocalStorage();
@@ -76,26 +63,15 @@ class ConverterContainer extends React.Component {
     return (
       <Container style={{ marginTop: 85 }}>
         <Form>
-          { this.state.parseError &&
-            <Label
-              basic
-              color='red'
-              pointing='below'
-              style={{
-                position: "absolute",
-                top: -37,
-              }}
-            >フォーマットが間違っています</Label>
-          }
           <TextArea
             autoHeight
             placeholder="牌を入力してください 例: 114s514m19p19z810s"
-            value={this.state.inputValue}
+            value={this.state.inputText}
             style={{
               fontFamily: "Lato,\"Helvetica Neue\",Arial,Helvetica,sans-serif",
               marginBottom: 10,
             }}
-            onChange={this.handleChangeInputValue}
+            onChange={this.handleChangeInputText}
           />
           <Button
             fluid
@@ -112,8 +88,6 @@ class ConverterContainer extends React.Component {
         />
         <ConvertResult
           result={this.state.result}
-          resultActiveSegment={this.state.resultActiveSegment}
-          handleSwitchSegment={this.handleSwitchSegment}
         />
       </Container>
     );
