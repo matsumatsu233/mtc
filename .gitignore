@@ -1,2 +1,4 @@
 node_modules/*
 bundle/*
+!bundle/bundle.js
+!bundle/bundle.js.gz
