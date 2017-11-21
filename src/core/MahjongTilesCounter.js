@@ -6,13 +6,18 @@ export function addCount(convertedHtml) {
   return convertedHtmlWithTilesCount;
 
   function addCountForOneGroup(html) {
-    const MahjongTilesCount = html.match(/<img.*?>/g).length;
+    const matchResult = html.match(/<img.*?>/g);
+    if (matchResult) {
+      const MahjongTilesCount = matchResult.length;
 
-    return `
-      <span style="position: relative">
-        <span>${html}</span>
-        <span style="position: absolute; left: 50%; bottom: -30px; transform: translateX(-50%); white-space: nowrap;">(${MahjongTilesCount}枚)</span>
-      </span>
-    `.replace(/>\s+?</g,"><").replace(/\n/g, "");
+      return `
+        <span style="position: relative">
+          <span>${html}</span>
+          <span style="position: absolute; left: 50%; bottom: -30px; transform: translateX(-50%); white-space: nowrap;">(${MahjongTilesCount}枚)</span>
+        </span>
+      `.replace(/>\s+?</g,"><").replace(/\n/g, "");
+    } else {
+      return html;
+    }
   }
 }
