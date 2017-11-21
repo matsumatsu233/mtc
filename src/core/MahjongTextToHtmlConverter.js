@@ -1,6 +1,6 @@
 import { parse, PARSE_RESULT } from "./MahjongTextParser.js";
 
-const MahjongTilesRegex = /(?:[0-9lrbLR][0-9lrbLRmpsz]*[mpsz] *)+/g;
+const MahjongTilesRegex = /(?:(?:(?:[lrbLR][0-9]|[0-9])+[mpsz])+ *)+/g;
 
 export function convert(inputText, options) {
   const convertedHtml = inputText.replace(MahjongTilesRegex, parseAndConvert);
