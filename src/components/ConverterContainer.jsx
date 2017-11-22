@@ -44,6 +44,12 @@ class ConverterContainer extends React.Component {
     });
   }
 
+  handleInputKeyPress = (event) => {
+    if (event.ctrlKey && event.key === "Enter") {
+      this.handleConvert(this.state.options);
+    }
+  }
+
   handleChangeOptions = (options) => {
     this.setState({ options: options });
     this.handleConvert(options);
@@ -72,13 +78,14 @@ class ConverterContainer extends React.Component {
               marginBottom: 10,
             }}
             onChange={this.handleChangeInputText}
+            onKeyPress={this.handleInputKeyPress}
           />
           <Button
             fluid
             style={{ marginBottom: 15 }}
             onClick={() => this.handleConvert(this.state.options)}
           >
-            変換
+            変換(Ctrl + Enter)
           </Button>
         </Form>
         <ConvertOptionsForm

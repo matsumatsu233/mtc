@@ -26,6 +26,14 @@ class ConvertResult extends React.Component {
     this.state = savedState || defaultState;
   }
 
+  componentDidMount() {
+    document.onkeypress = (event) => {
+      if (event.ctrlKey && event.shiftKey && event.key === "C") {
+        document.getElementById("copy").click();
+      }
+    };
+  }
+
   saveStateToLocalStorage = () => {
     localStorage.setItem("ConvertResultState", JSON.stringify(this.state));
   }
@@ -65,8 +73,9 @@ class ConvertResult extends React.Component {
           <Menu.Item position='right'>
             <Button
               className="btn"
+              id="copy"
               data-clipboard-text={this.props.result.convertedHtml}
-            >クリップボードにコピー</Button>
+            >クリップボードにコピー(Ctrl + Shift + C)</Button>
           </Menu.Item>
         </Menu>
 
