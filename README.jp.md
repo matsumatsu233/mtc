@@ -13,14 +13,6 @@ http://ssdh233.me/mtc
 ## 貢献
 
 ### ビルド
-1. 
-```
-npm install
-```
-
-2.
-```
-webpack
-```
-
+1. `npm install`
+2. `webpack`
 3. index.htmlをブラウザで開けます。 自分はreact-devtoolsを使うために[http-server](https://www.npmjs.com/package/http-server)を使って、localhost:8080からアクセスしています。
