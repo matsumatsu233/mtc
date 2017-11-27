@@ -10,8 +10,7 @@ A web app which can convert mahjong tiles text(like "123s456m789p55z") to HTML.
 ## Usage
 Sorry now only Japanese version is available. If you can read Japanese, please see [examples page](http://ssdh233.me/mtc/#/examples).
 
-If you want to use it but cannot understand Japanese, please let me know. (Open an issue here, or connect me from my blog (TODO add blog link)).
-
+If you want to use it but cannot understand Japanese, please let me know. (Open an issue here, or connect me from [my blog](http://ssdh233.me/blog/2017/11/25/mtc.html)).
 ## Contribution
 
 ### Build
